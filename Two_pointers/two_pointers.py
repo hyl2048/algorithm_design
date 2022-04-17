@@ -5,7 +5,7 @@ def expendcenter(str, left, right):
         left -= 1
         right += 1
     return left + 1, right - 1
-def longest_palindromic_substring(str):
+def longest_palindromic_substring(str): #最长回文子串
     if len(str) == 1:
         return str
     start = 0
@@ -19,7 +19,7 @@ def longest_palindromic_substring(str):
             start, end = left2, right2
     return str[start:end + 1]
             
-def find_k_closed_elements(arr, k, x):
+def find_k_closed_elements(arr, k, x): # k个最近的元素
     ans =[]
     if arr[0] <= x <= arr[len(arr)-1]:
         xindex = getxindex(arr,x)
@@ -50,7 +50,7 @@ def getxindex(arr, x):
         else:
             return i
 # 同向指针
-def longest_substr_NoRep(str):# sliding window
+def longest_substr_NoRep(str):# sliding window 无重复最长子串
     left = 0
     right = -1
     wind = set()
@@ -58,7 +58,7 @@ def longest_substr_NoRep(str):# sliding window
     ans = 0
     for i in range(n):
         if i != 0:
-            wind.remove(str[i - 1])
+            wind.remove(str[i - 1])  # 在第一个重复区域第一个位置停下并逐个移除wind中的值
         while right + 1 < n and str[right + 1] not in wind:
             wind.add(str[right + 1])
             right += 1
@@ -228,7 +228,14 @@ def reverse(str):#字符串翻转
     return str
 
 if __name__ == '__main__':
-    str ="baf7b"
+    ## 双指针
+    ## 数据结构 数组 链表
+    ## 类型
+    #       同向双指针：无重复最长子串
+                # 快慢双指针： 链表环的判断
+    #       相向双指针：两数之和
+    #       背向双指针：最长回文子串 k个最近的元素
+    str ="baf7bbcd"
     arr = [6,1,2,3,4,5]
     k , x =4, 3
     head = creatLinkNode(7)
@@ -237,7 +244,7 @@ if __name__ == '__main__':
     # printLinkNode(head)
     # print(longest_palindromic_substring(str))
     # print(find_k_closed_elements(arr, k, x))
-    # print(longest_substr_NoRep(str))
+    print(longest_substr_NoRep(str))
     # print(f_mid_point_link(head))
     # print(find_cycle_linkNode(head))
     # print('{0}'.format(find_two_sum(arr, 6)))

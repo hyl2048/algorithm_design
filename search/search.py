@@ -47,6 +47,10 @@ def binary_search2(arr, target):# 二分法 非递归 进阶版
     return -1
             
 if __name__ == '__main__':
+    # 二分搜索查找：
+    #    递归
+    #    非递归
+    
     arr = [1, 3, 5, 7, 9]
     
     print(binary_search2(arr, 9))

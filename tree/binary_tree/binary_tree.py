@@ -41,12 +41,12 @@ class AVL(object):
             return 0
         return self.tree_height(node.left)
     
-    def right_high(self, node):
+    def right_high(self, node): # 左树高
         if node is None:
             return 0
         return self.tree_height(node.right)
     
-    def tree_height(self, node):
+    def tree_height(self, node): # 树高
         if node is None:
             return 0
         return max(self.tree_height(node.left), self.tree_height(node.right)) + 1
@@ -294,6 +294,40 @@ class BSTIterator2: #二叉树中序遍历 非递归写法v2 优化版 代码风
         return node
         
 if __name__ == "__main__":
+    ## 分治法可解决二叉树99%的问题
+    
+    
+    # 二叉树：
+    #    创建：
+    #
+    #    遍历：
+    #       先序遍历：
+    #          递归写法
+    #          非递归写法
+    #       中序遍历：
+    #          递归写法
+    #          非递归写法
+    #       后序遍历：
+    #          递归写法
+    #          非递归写法
+    #       层次遍历
+    #    平衡二叉树：
+    #       平衡判断
+    #       平衡调整：
+    #           LL
+    #           LR
+    #           RR
+    #     搜索：
+    #       BST(二分查找树)
+    #       BFS：
+    #
+    #          模板
+    #          应用场景
+    #       DFS
+    #       BFS+DFS
+    
+    #     红黑树(balence BST)：
+    
     tree = AVL()
     node_array = [4, 3, 6, 5, 7, 8]
     node_array_balen = [6, 5, 9]
