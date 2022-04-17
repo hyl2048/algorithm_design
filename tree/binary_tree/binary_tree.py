@@ -292,6 +292,72 @@ class BSTIterator2: #二叉树中序遍历 非递归写法v2 优化版 代码风
         if node.right:
             self.find_most_left(node.right)
         return node
+    
+def BFS_level_reverse(root):
+    if not root:
+        return []
+    res = []
+    restemp = []
+    deque = collections.deque()
+    temp = root
+    deque.append(temp)
+    deque.append("#")
+    flag = 0
+    while deque:
+        temp = deque.popleft()
+        if temp != "#":
+            restemp.append(temp.data)
+            if temp.left:
+                deque.append(temp.left)
+            if temp.right:
+                deque.append(temp.right)
+        else:
+            if flag % 2 == 0:
+                res.append(list(restemp))
+                if len(deque) == 0:
+                    return res
+                else:
+                    deque.append("#")
+                   
+                flag = flag + 1
+                restemp = []
+            else:
+                res.append(list(restemp[::-1]))
+                if len(deque) == 0:
+                    return res
+                else:
+                    deque.append("#")
+                flag = flag + 1
+                restemp = []
+
+def BFS_reverse_level2(root):### z 字型 遍历 二叉树
+    if not root:
+            return []
+    res = []
+    restemp = [] # 初始化结果存储变量
+    deque = collections.deque() # 定义 队列
+    deque.append(root)
+    deque.append("#") #初始化队列
+    while deque: # 用队列来遍历每个Node
+        temp = deque.popleft()
+        if temp != "#":  # 是否为层结尾
+            restemp.append(temp.data) # 记录每层的值
+            if temp.left: #
+                deque.append(temp.left)
+            if temp.right:
+                deque.append(temp.right)
+        else:
+            res.append(list(restemp))
+            if len(deque) != 0: # 是否遍历到了最后一个数
+                deque.append("#")
+            else:
+                return reverse(res)
+            restemp = []
+def reverse(res): # 反转
+    for i in range(len(res)):
+        if i % 2 != 0: # 偶数层反转链表
+            res[i].reverse()
+    return res
         
 if __name__ == "__main__":
     ## 分治法可解决二叉树99%的问题
@@ -339,5 +405,5 @@ if __name__ == "__main__":
     # res = tree.back_output_no(tree.root)
     # print(res[::-1])
     # tree.BFS(tree.root)
-    print(tree.leverl_order_travel(tree.root))
+    print(BFS_reverse_level2(tree.root))
         
