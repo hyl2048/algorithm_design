@@ -358,7 +358,55 @@ def reverse(res): # 反转
         if i % 2 != 0: # 偶数层反转链表
             res[i].reverse()
     return res
-        
+
+def BFS_down2Up(root):
+    if not root:
+        return []
+    res = []
+    restemp = []
+    deque = collections.deque()
+    deque.append(root)
+    deque.append("#")
+    while deque:
+        temp = deque.popleft()
+        if temp != "#":
+            restemp.append(temp.data)
+            if temp.left:
+                deque.append(temp.left)
+            if temp.right:
+                deque.append(temp.right)
+        else:
+            if len(deque) == 0:
+                res.append(list(restemp)) # 记得在回传结果之前 append 最后的restemp
+                return res[::-1]
+            else:
+                res.append(list(restemp))
+                deque.append("#")
+                restemp = []
+                
+def getpath(root, targetSum):
+    def sumsubres(subres):
+        sum = 0
+        for i in range(len(subres)):
+            sum += subres[i]
+        return sum
+    
+    stack = collections.deque()
+    temp = root
+    res = []
+    subres = []
+    while temp or stack:
+        while temp:
+            stack.append(temp)
+            subres.append(temp.data)
+            temp = temp.left
+        if stack:
+            if sumsubres(subres) == targetSum:
+                res.append(list(subres))
+            atemp = stack.pop()
+            subres.pop()
+            temp = atemp.right
+    return res
 if __name__ == "__main__":
     ## 分治法可解决二叉树99%的问题
     
@@ -396,6 +444,7 @@ if __name__ == "__main__":
     
     tree = AVL()
     node_array = [4, 3, 6, 5, 7, 8]
+    node_array1 = [3, 9, 20, 15, 7]
     node_array_balen = [6, 5, 9]
     for item in node_array:
         tree.insert(item)
@@ -405,5 +454,5 @@ if __name__ == "__main__":
     # res = tree.back_output_no(tree.root)
     # print(res[::-1])
     # tree.BFS(tree.root)
-    print(BFS_reverse_level2(tree.root))
+    print(getpath(tree.root, 7))
         

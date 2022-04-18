@@ -21,7 +21,7 @@ def quick_sort(arr):# 快排 分治法 递归  1函数功能 2停止条件 3递�
         right = quick_sort([x for x in arr[1:] if x < pivot])
     return left + [pivot] + right
 
-def quick_sort_stack(arr):# 快排 分治法 栈
+def quick_sort_stack(arr):# 快排 分治法 栈 相向双指针
     if len(arr) < 2:
         return arr
     stack = []
@@ -38,7 +38,7 @@ def quick_sort_stack(arr):# 快排 分治法 栈
             stack.append(r)
             stack.append(index + 1)
     return  arr
-def partition(arr, start, end):
+def partition(arr, start, end): # 大于pivort的放在右边，小于的放在左边
     pivot = arr[start]
     while start < end:
         while start < end and arr[end] >= pivot:
@@ -46,6 +46,7 @@ def partition(arr, start, end):
         arr[start] = arr[end]
         while start < end and arr[start] <= pivot:
             start += 1
+        arr[end] = arr[start]
     arr[start] = pivot
     return start
 
@@ -150,7 +151,9 @@ def merge(arr, l, m, r): # 划分区间后左右按大小调序的操作，使�
 
 
 if __name__ == '__main__':
-    arr =[11,2,5,6,9]
+    arr =[7,3,9,1,2,3,8]
+    arr1 =[1,2,3,4,5,6,7,8]
+    arr2= arr1[::-1]
     # arr_sort = bubble_sort(arr)
     # arr_sort = quick_sort(arr)
     # arr_sort = quick_sort_stack(arr)
