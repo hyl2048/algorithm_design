@@ -20,5 +20,23 @@ def groupAnagrams(strs) : # https://leetcode-cn.com/problems/group-anagrams/solu
         dict[key] = dict.get(key, []) + [i] # dict.get(key, value)的用法 ,key不存在时，返回默认的value
     return list(dict.values())
 
+def longestConsecutive(nums): # 学会去掉代码中多余的东西很重要
+    dict = {}
+    listtemp =  []
+    num_set = set(nums)
+    maxval = 0
+    for item in num_set:
+        if item - 1 not in num_set:
+            curnum = item
+            curval = 1
+            while curnum + 1 in num_set:
+                curval += 1
+                curnum += 1
+            maxval = max(maxval, curval)
+    return maxval
+
+# LRU cache 哈希表 加 双向链表
+
+
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 print(groupAnagrams(strs))
